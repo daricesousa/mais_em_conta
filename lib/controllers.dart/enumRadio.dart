@@ -1,0 +1,1 @@
+enum PesosRadio { pesoA, pesoB, pesoDigitado}
