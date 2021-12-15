@@ -3,7 +3,11 @@ import 'package:mais_em_conta/Custom/tField.dart';
 import 'package:mais_em_conta/controllers.dart/textController.dart';
 import 'package:mais_em_conta/tipoInput.dart';
 
-Widget card({required TextController textController, required String letra, required Function funcao, bool habilitado=true}) {
+Widget card(
+    {required TextController textController,
+    required String letra,
+    required Function funcao,
+    bool habilitado = true}) {
   return Expanded(
       child: Card(
     child: Padding(
@@ -15,6 +19,9 @@ Widget card({required TextController textController, required String letra, requ
             tipo: tipoInput.titulo,
             controller: textController.titulo,
             habilitado: habilitado,
+            onChanged: (e) {
+              funcao();
+            },
           ),
           TField(
             label: 'Peso',

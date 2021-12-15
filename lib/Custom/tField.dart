@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mais_em_conta/Custom/style.dart';
-import 'package:mais_em_conta/cor.dart';
+import 'package:mais_em_conta/Custom/cor.dart';
 import 'package:flutter/services.dart';
 import 'package:mais_em_conta/tipoInput.dart';
-import 'package:mais_em_conta/currencyInputFormatter.dart';
+import 'package:mais_em_conta/controllers.dart/currencyInputFormatter.dart';
 
 class TField extends StatelessWidget {
   final TextEditingController? controller;
   final String? label;
   final void Function(String?)? onChanged;
   final String? Function(String?)? validator;
-  late tipoInput tipo;
+  late final tipoInput tipo;
   final String? letra;
-  late bool habilitado;
+  late final bool habilitado;
 
   TField({
     required this.tipo,

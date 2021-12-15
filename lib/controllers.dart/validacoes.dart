@@ -1,6 +1,6 @@
-import 'package:mais_em_conta/textos.dart';
+import 'package:mais_em_conta/Custom/textos.dart';
 
-import 'controllers.dart/converter.dart';
+import 'converter.dart';
 
 class Validacao {
   static String? peso(String? text) {

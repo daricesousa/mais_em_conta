@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:mais_em_conta/cor.dart';
+import 'package:mais_em_conta/Custom/cor.dart';
 
 class Style {
   static final texto = TextStyle(color: Cor.primary);

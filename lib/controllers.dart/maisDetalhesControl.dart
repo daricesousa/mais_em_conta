@@ -1,12 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:mais_em_conta/enumRadio.dart';
 import 'package:mais_em_conta/controllers.dart/textController.dart';
 import 'package:mais_em_conta/controllers.dart/variaveis.dart';
-import 'package:mais_em_conta/textos.dart';
+import 'package:mais_em_conta/Custom/textos.dart';
 
-class MaisDetalhesController {
+class MaisDetalhesController extends ChangeNotifier{
   double novoPrecoA = 0;
   double novoPrecoB = 0;
   double diferenca = 0;
   String economiza = '';
+  PesosRadio? pesoEscolhido;
 
   Peso _peso = Peso.peso;
   Preco _preco = Preco.preco;
@@ -21,6 +24,7 @@ class MaisDetalhesController {
       diferenca = novoPrecoB - novoPrecoA;
       economiza = Texto.economiza(Titulo.titulo.A, diferenca);
     }
+    notifyListeners();
   }
 
   void preencherCards(double pesoMain) {
@@ -30,6 +34,7 @@ class MaisDetalhesController {
     TextController.maisDetalhesB.peso.text = pesoMain.toString();
     TextController.maisDetalhesA.titulo = TextController.A.titulo;
     TextController.maisDetalhesB.titulo = TextController.B.titulo;
+    notifyListeners();
   }
 
   double regraDeTres(double valor1, double valor2, double valor3) {

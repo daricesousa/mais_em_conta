@@ -1,5 +1,5 @@
 
-import 'controllers.dart/converter.dart';
+import '../controllers.dart/converter.dart';
 
 class Texto {
   static produtoMaisEconomico(produto) {

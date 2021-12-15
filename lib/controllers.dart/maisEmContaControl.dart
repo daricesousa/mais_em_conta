@@ -1,16 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:mais_em_conta/controllers.dart/converter.dart';
-import 'package:mais_em_conta/controllers.dart/enumRadio.dart';
-import 'package:mais_em_conta/controllers.dart/maisDetalhesControl.dart';
 import 'package:mais_em_conta/controllers.dart/textController.dart';
 import 'package:mais_em_conta/controllers.dart/variaveis.dart';
-import 'package:mais_em_conta/textos.dart';
-import 'package:mais_em_conta/validacoes.dart';
+import 'package:mais_em_conta/Custom/textos.dart';
+import 'package:mais_em_conta/controllers.dart/validacoes.dart';
 
 class MaisEmContaControl extends ChangeNotifier {
-
-PesosRadio? pesoEscolhido;
 
   Peso _peso = Peso.peso;
   Preco _preco = Preco.preco;
@@ -18,18 +14,8 @@ PesosRadio? pesoEscolhido;
 
   String maisEconomico = '';
   bool calculado = false;
-  final controllerMaisDetalhes = MaisDetalhesController();
   String? erro;
 
-  void calcularNovosPrecos(double pesoMain){
-    controllerMaisDetalhes.calcularNovosPrecos(pesoMain);
-    notifyListeners();
-  }
-
-   void preencherCards(double pesoMain){
-    controllerMaisDetalhes.preencherCards(pesoMain);
-    notifyListeners();
-  }
 
   void prencherPrecos() {
     double value = 0;
@@ -80,7 +66,6 @@ PesosRadio? pesoEscolhido;
     } else {
       maisEconomico = Texto.mesmoCusto;
     }
-    pesoEscolhido = null;
     notifyListeners();
   }
 

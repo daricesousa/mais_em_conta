@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mais_em_conta/cor.dart';
-import 'package:mais_em_conta/routes.dart';
+import 'package:mais_em_conta/Custom/cor.dart';
+import 'package:mais_em_conta/controllers.dart/routes.dart';
 
 void main() {
   runApp(MaterialApp(

@@ -2,14 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mais_em_conta/Custom/card.dart';
 import 'package:mais_em_conta/Custom/divider.dart';
-import 'package:mais_em_conta/Custom/radio.dart';
 import 'package:mais_em_conta/Custom/style.dart';
-import 'package:mais_em_conta/Custom/tField.dart';
 import 'package:mais_em_conta/controllers.dart/maisEmContaControl.dart';
 import 'package:mais_em_conta/controllers.dart/textController.dart';
-import 'package:mais_em_conta/controllers.dart/variaveis.dart';
-import 'package:mais_em_conta/cor.dart';
-import 'package:mais_em_conta/textos.dart';
+import 'package:mais_em_conta/Custom/cor.dart';
+import 'package:mais_em_conta/controllers.dart/routes.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -46,85 +43,53 @@ class _HomePageState extends State<HomePage> {
             builder: (context, snapshot) {
               return Column(
                 children: [
-                  Row(
-                    children: [
-                      card(
-                        letra: 'A',
-                        textController: TextController.A,
-                        funcao: controller.chamarCalcular,
-                      ),
-                      card(
-                        letra: 'B',
-                        textController: TextController.B,
-                        funcao: controller.chamarCalcular,
-                      ),
-                    ],
-                  ),
+                  cards(),
                   DividerCust(),
-                  controller.maisEconomico != ''
-                      ? Text(controller.maisEconomico)
-                      : Text(controller.erro ?? ''),
+                  mensagemMaisEconomico(),
                   DividerCust(),
-                  controller.calculado
-                      ? ExpansionTile(
-                          title: Text(
-                            "Mais detalhes",
-                            textAlign: TextAlign.center,
-                          ),
-                          trailing: Container(width: 20),
-                          leading: Container(
-                            width: 10,
-                          ),
-                          // onExpansionChanged: (e){
-                          //   controller.aberto = true;
-                          //   // pesoEscolhido = null;
-                          // },
-                          tilePadding: EdgeInsets.zero,
-                          children: [
-                            RadioCunst(controller),
-                            controller.pesoEscolhido != null
-                                ? Row(
-                                    children: [
-                                      card(
-                                        letra: 'A',
-                                        textController:
-                                            TextController.maisDetalhesA,
-                                        habilitado: false,
-                                        funcao: () {},
-                                      ),
-                                      card(
-                                        letra: 'B',
-                                        textController:
-                                            TextController.maisDetalhesB,
-                                        funcao: () {},
-                                        habilitado: false,
-                                      ),
-                                    ],
-                                  )
-                                : Container(),
-                            controller.pesoEscolhido != null
-                                ? ListTile(
-                                    title: Text(
-                                        "${controller.controllerMaisDetalhes.economiza}"),
-                                  )
-                                : Container(),
-                          ],
-                        )
-                      : Container(),
+                  botaoMaisDetalhes(),
                 ],
               );
             }),
-            Wrap(
-              children: [
-                Container(width: 100, height: 50, color: Colors.red,),
-                Container(width: 100, height: 50, color: Colors.blue,),
-                Container(width: 100, height: 50, color: Colors.red,),
-                Container(width: 100, height: 50, color: Colors.blue,),
-
-
-              ],
-            )
       ],
+    );
+  }
+
+  Widget cards() {
+    return Row(
+      children: [
+        card(
+          letra: 'A',
+          textController: TextController.A,
+          funcao: controller.chamarCalcular,
+        ),
+        card(
+          letra: 'B',
+          textController: TextController.B,
+          funcao: controller.chamarCalcular,
+        ),
+      ],
+    );
+  }
+
+  Widget mensagemMaisEconomico() {
+    return Visibility(
+      visible: controller.maisEconomico != '',
+      child: Text(controller.maisEconomico, style: Style.titulo),
+      replacement: Text(controller.erro ?? ''),
+    );
+  }
+
+  Widget botaoMaisDetalhes() {
+    return Visibility(
+      visible: controller.calculado,
+      child: GestureDetector(
+        child: Text(
+          "Mais detalhes",
+          style: TextStyle(decoration: TextDecoration.underline),
+        ),
+        onTap: () => Navigator.pushNamed(context, RoutesNome.MAISDETALHES),
+      ),
     );
   }
 }
