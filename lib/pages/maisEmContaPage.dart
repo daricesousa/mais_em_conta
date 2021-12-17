@@ -17,10 +17,7 @@ class _HomePageState extends State<HomePage> {
   final controller = MaisEmContaControl();
 
   @override
-  void initState() {
-    controller.prencherPrecos();
-    super.initState();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {

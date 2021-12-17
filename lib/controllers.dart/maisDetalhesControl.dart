@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mais_em_conta/enumRadio.dart';
 import 'package:mais_em_conta/controllers.dart/textController.dart';
+import 'package:mais_em_conta/enumRadio.dart';
 import 'package:mais_em_conta/controllers.dart/variaveis.dart';
 import 'package:mais_em_conta/Custom/textos.dart';
 
-class MaisDetalhesController extends ChangeNotifier{
+class MaisDetalhesController extends ChangeNotifier {
   double novoPrecoA = 0;
   double novoPrecoB = 0;
   double diferenca = 0;
