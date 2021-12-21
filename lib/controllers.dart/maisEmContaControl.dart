@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:mais_em_conta/controllers.dart/converter.dart';
 import 'package:mais_em_conta/controllers.dart/textController.dart';
 import 'package:mais_em_conta/controllers.dart/variaveis.dart';
@@ -12,52 +9,59 @@ class MaisEmContaControl extends ChangeNotifier {
   Peso _peso = Peso.peso;
   Preco _preco = Preco.preco;
   Titulo _titulo = Titulo.titulo;
+  final _textController = TextController.maisEmConta;
 
   String maisEconomico = '';
   bool calculado = false;
   String? erro;
 
-  void prencherPrecos() {
-    Timer.run(() {
-      double value = 0;
-      final formatter = NumberFormat.simpleCurrency(locale: "pt_Br");
-      String newText = formatter.format(value / 100);
-      TextController.A.preco.value = TextController.A.preco.value.copyWith(
-          text: newText,
-          selection: new TextSelection.collapsed(offset: newText.length));
-      TextController.B.preco.value = TextController.B.preco.value.copyWith(
-          text: newText,
-          selection: new TextSelection.collapsed(offset: newText.length));
-    });
+  void iniciarCards() {
+    _copiarCard(_textController.A, TextController.regraDeTres.A);
+    _copiarCard(_textController.B, TextController.regraDeTres.B);
+
+    double? precoA = Converter.reaisParaDouble(_textController.A.preco.text);
+    double? precoB = Converter.reaisParaDouble(_textController.B.preco.text);
+    if(precoA == null || precoA == 0){
+      _textController.A.preco.text = Converter.doubleParaTextControllerPreco(0);
+    }
+    if(precoB == null || precoB == 0){
+      _textController.B.preco.text = Converter.doubleParaTextControllerPreco(0);
+    }
+  }
+
+  void _copiarCard(ControllerCard controllerCard1, ControllerCard controllerCard2){
+    controllerCard1.peso.text = controllerCard2.peso.text;
+    controllerCard1.preco.text = controllerCard2.preco.text;
+    controllerCard1.titulo.text = controllerCard2.titulo.text;
   }
 
   void chamarCalcular() {
     maisEconomico = '';
     calculado = false;
-    if (_validacoes(Validacao.peso(TextController.A.peso.text)) &&
-        _validacoes(Validacao.peso(TextController.B.peso.text)) &&
-        _validacoes(Validacao.preco(TextController.A.preco.text)) &&
-        _validacoes(Validacao.preco(TextController.B.preco.text))) {
+    if (_validacoes(Validacao.peso(_textController.A.peso.text)) &&
+        _validacoes(Validacao.peso(_textController.B.peso.text)) &&
+        _validacoes(Validacao.preco(_textController.A.preco.text)) &&
+        _validacoes(Validacao.preco(_textController.B.preco.text))) {
       _definirVariaveis();
       _calcular();
     }
 
-    Timer.run(() {
+    
       notifyListeners();
-    });
+  
   }
 
   void _definirVariaveis() {
     calculado = true;
-    _peso.A = Converter.stringParaDouble(TextController.A.peso.text);
-    _peso.B = Converter.stringParaDouble(TextController.B.peso.text);
-    _preco.A = Converter.reaisParaDouble(TextController.A.preco.text)!;
-    _preco.B = Converter.reaisParaDouble(TextController.B.preco.text)!;
+    _peso.A = Converter.stringParaDouble(_textController.A.peso.text);
+    _peso.B = Converter.stringParaDouble(_textController.B.peso.text);
+    _preco.A = Converter.reaisParaDouble(_textController.A.preco.text)!;
+    _preco.B = Converter.reaisParaDouble(_textController.B.preco.text)!;
 
-    if (TextController.A.titulo.text != '')
-      _titulo.A = TextController.A.titulo.text;
-    if (TextController.B.titulo.text != '')
-      _titulo.B = TextController.B.titulo.text;
+    if (_textController.A.titulo.text != '')
+      _titulo.A = _textController.A.titulo.text;
+    if (_textController.B.titulo.text != '')
+      _titulo.B = _textController.B.titulo.text;
   }
 
   void _calcular() {
@@ -70,9 +74,9 @@ class MaisEmContaControl extends ChangeNotifier {
     } else {
       maisEconomico = Texto.mesmoCusto;
     }
-    Timer.run(() {
+   
       notifyListeners();
-    });
+   
   }
 
   bool _validacoes(String? validacao) {

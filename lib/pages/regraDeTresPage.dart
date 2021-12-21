@@ -16,7 +16,7 @@ class _RegraDeTresPageState extends State<RegraDeTresPage> {
   @override
   void initState() {
     // TODO: implement initState
-    controller.iniciarVariaveis();
+    controller.iniciarCards();
     super.initState();
   }
 
@@ -56,10 +56,10 @@ class _RegraDeTresPageState extends State<RegraDeTresPage> {
   Widget cards() {
     return Row(
       children: [
-        card(letra: 'A', textController: TextController.A, funcao: () {}),
+        card(letra: 'A', controllerCard: TextController.regraDeTres.A, funcao: () {}),
         card(
           letra: 'B',
-          textController: TextController.B,
+          controllerCard: TextController.regraDeTres.B,
           funcao: () {},
         ),
       ],

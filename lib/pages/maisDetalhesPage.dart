@@ -58,13 +58,13 @@ class _MaisDetalhesState extends State<MaisDetalhes> {
       children: [
         card(
           letra: 'A',
-          textController: TextController.maisDetalhesA,
+          controllerCard: TextController.maisDetalhes.A,
           habilitado: false,
           funcao: () {},
         ),
         card(
           letra: 'B',
-          textController: TextController.maisDetalhesB,
+          controllerCard: TextController.maisDetalhes.B,
           funcao: () {},
           habilitado: false,
         ),

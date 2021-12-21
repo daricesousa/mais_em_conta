@@ -16,10 +16,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final controller = MaisEmContaControl();
 
-
   @override
    void initState() {
-    controller.prencherPrecos();
+    controller.iniciarCards();
     super.initState();
   }
 
@@ -61,12 +60,12 @@ class _HomePageState extends State<HomePage> {
       children: [
         card(
           letra: 'A',
-          textController: TextController.A,
+          controllerCard: TextController.maisEmConta.A,
           funcao: controller.chamarCalcular,
         ),
         card(
           letra: 'B',
-          textController: TextController.B,
+          controllerCard: TextController.maisEmConta.B,
           funcao: controller.chamarCalcular,
         ),
       ],

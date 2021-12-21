@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:mais_em_conta/controllers.dart/converter.dart';
 import 'package:mais_em_conta/controllers.dart/textController.dart';
 import 'package:mais_em_conta/enumRadio.dart';
 import 'package:mais_em_conta/controllers.dart/variaveis.dart';
@@ -17,8 +16,8 @@ class MaisDetalhesController extends ChangeNotifier {
   Preco _preco = Preco.preco;
 
   void calcularNovosPrecos(double pesoMain) {
-    novoPrecoA = regraDeTres(_peso.A!, _preco.A, pesoMain);
-    novoPrecoB = regraDeTres(_peso.B!, _preco.B, pesoMain);
+    novoPrecoA = _regraDeTres(_peso.A!, _preco.A, pesoMain);
+    novoPrecoB = _regraDeTres(_peso.B!, _preco.B, pesoMain);
     if (novoPrecoA > novoPrecoB) {
       diferenca = novoPrecoA - novoPrecoB;
       economiza = Texto.economiza(Titulo.titulo.B, diferenca);
@@ -26,24 +25,21 @@ class MaisDetalhesController extends ChangeNotifier {
       diferenca = novoPrecoB - novoPrecoA;
       economiza = Texto.economiza(Titulo.titulo.A, diferenca);
     }
-   Timer.run(() {
       notifyListeners();
-    });
+
   }
 
   void preencherCards(double pesoMain) {
-    TextController.maisDetalhesA.preco.text = novoPrecoA.toStringAsFixed(2);
-    TextController.maisDetalhesA.peso.text = pesoMain.toString();
-    TextController.maisDetalhesB.preco.text = novoPrecoB.toStringAsFixed(2);
-    TextController.maisDetalhesB.peso.text = pesoMain.toString();
-    TextController.maisDetalhesA.titulo = TextController.A.titulo;
-    TextController.maisDetalhesB.titulo = TextController.B.titulo;
-    Timer.run(() {
+    TextController.maisDetalhes.B.preco.text = Converter.doubleParaTextControllerPreco(novoPrecoB);
+    TextController.maisDetalhes.A.preco.text = Converter.doubleParaTextControllerPreco(novoPrecoA);
+    TextController.maisDetalhes.A.peso.text = pesoMain.toString();
+    TextController.maisDetalhes.B.peso.text = pesoMain.toString();
+    TextController.maisDetalhes.A.titulo.text = TextController.maisEmConta.A.titulo.text;
+    TextController.maisDetalhes.B.titulo.text = TextController.maisEmConta.B.titulo.text;
       notifyListeners();
-    });
   }
 
-  double regraDeTres(double valor1, double valor2, double valor3) {
+  double _regraDeTres(double valor1, double valor2, double valor3) {
     return (valor3 * valor2) / valor1;
   }
 }

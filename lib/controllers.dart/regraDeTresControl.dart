@@ -9,29 +9,34 @@ import 'package:mais_em_conta/enumCampo.dart';
 
 class RegraDeTresControl extends ChangeNotifier {
   String? erro;
+  final _textController = TextController.regraDeTres;
 
-  void iniciarVariaveis() {
-    print(TextController.RegraDeTres.A.titulo.hashCode);
-  print(TextController.MaisEmConta.A.titulo.hashCode);
-    // double? precoA = Converter.reaisParaDouble(TextController.A.preco.text);
-    // if (precoA == 0) {
-    //   Timer.run(() {
-    //     TextController.A.preco.clear();
-    //   });
-    // }
-    // double? precoB = Converter.reaisParaDouble(TextController.A.preco.text);
-    // if (precoB == 0) {
-    //   Timer.run(() {
-    //     TextController.B.preco.clear();
-    //   });
-    // }
+  void iniciarCards() {
+    _copiarCard(_textController.A, TextController.maisEmConta.A);
+    _copiarCard(_textController.B, TextController.maisEmConta.B);
+
+    double? precoA = Converter.reaisParaDouble(_textController.A.preco.text);
+    if (precoA == 0) {
+      _textController.A.preco.clear();
+    }
+    double? precoB = Converter.reaisParaDouble(_textController.A.preco.text);
+    if (precoB == 0) {
+      _textController.B.preco.clear();
+    }
+  }
+
+  void _copiarCard(
+      ControllerCard controllerCard1, ControllerCard controllerCard2) {
+    controllerCard1.peso.text = controllerCard2.peso.text;
+    controllerCard1.preco.text = controllerCard2.preco.text;
+    controllerCard1.titulo.text = controllerCard2.titulo.text;
   }
 
   String? validar() {
-    Campo pesoA = _validacoes(Validacao.peso(TextController.A.peso.text));
-    Campo pesoB = _validacoes(Validacao.peso(TextController.B.peso.text));
-    Campo precoA = _validacoes(Validacao.preco(TextController.A.preco.text));
-    Campo precoB = _validacoes(Validacao.preco(TextController.B.preco.text));
+    Campo pesoA = _validacoes(Validacao.peso(_textController.A.peso.text));
+    Campo pesoB = _validacoes(Validacao.peso(_textController.B.peso.text));
+    Campo precoA = _validacoes(Validacao.preco(_textController.A.preco.text));
+    Campo precoB = _validacoes(Validacao.preco(_textController.B.preco.text));
 
     int produto = _validarCampos(pesoA, 2) *
         _validarCampos(pesoB, 3) *
@@ -46,36 +51,34 @@ class RegraDeTresControl extends ChangeNotifier {
       erro = Erro.campoVazioRegraDeTres;
     else
       _chamarCalcular(produto);
-    Timer.run(() {
-      notifyListeners();
-    });
+    notifyListeners();
   }
 
   void _chamarCalcular(int produto) {
     erro = '';
     double? precoA, precoB, pesoA, pesoB;
 
-    pesoA = Converter.stringParaDouble(TextController.A.peso.text);
-    pesoB = Converter.stringParaDouble(TextController.B.peso.text);
-    precoA = Converter.reaisParaDouble(TextController.A.preco.text);
-    precoB = Converter.reaisParaDouble(TextController.B.preco.text);
+    pesoA = Converter.stringParaDouble(_textController.A.peso.text);
+    pesoB = Converter.stringParaDouble(_textController.B.peso.text);
+    precoA = Converter.reaisParaDouble(_textController.A.preco.text);
+    precoB = Converter.reaisParaDouble(_textController.B.preco.text);
 
     if (produto == 2) {
       double valor = _regraDeTres(pesoB!, precoA!, precoB!);
-      TextController.A.peso.text = valor.toStringAsFixed(2);
+      _textController.A.peso.text = valor.toStringAsFixed(2);
     }
     if (produto == 3) {
       double valor = _regraDeTres(pesoA!, precoB!, precoA!);
-      TextController.B.peso.text = valor.toStringAsFixed(2);
+      _textController.B.peso.text = valor.toStringAsFixed(2);
     }
     if (produto == 5) {
       double valor = _regraDeTres(precoB!, pesoA!, pesoB!);
-      TextController.A.preco.text =
+      _textController.A.preco.text =
           Converter.doubleParaTextControllerPreco(valor);
     }
     if (produto == 7) {
       double valor = _regraDeTres(precoA!, pesoB!, pesoA!);
-      TextController.B.preco.text =
+      _textController.B.preco.text =
           Converter.doubleParaTextControllerPreco(valor);
     }
 

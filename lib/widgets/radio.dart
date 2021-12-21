@@ -21,13 +21,13 @@ Widget RadiosRow(MaisDetalhesController controller) {
               valor: PesosRadio.pesoA,
               controller: controller,
               peso: Peso.peso.A!,
-              title: Text(TextController.A.peso.text),
+              title: Text(TextController.maisEmConta.A.peso.text),
             ),
             RadioCunst(
               valor: PesosRadio.pesoB,
               controller: controller,
               peso: Peso.peso.B!,
-              title: Text(TextController.B.peso.text),
+              title: Text(TextController.maisEmConta.B.peso.text),
             ),
             RadioCunst(
               valor: PesosRadio.pesoDigitado,

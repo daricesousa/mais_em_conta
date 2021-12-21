@@ -4,7 +4,7 @@ import 'package:mais_em_conta/controllers.dart/textController.dart';
 import 'package:mais_em_conta/tipoInput.dart';
 
 Widget card(
-    {required TextController textController,
+    {required ControllerCard controllerCard,
     required String letra,
     required Function funcao,
     bool habilitado = true}) {
@@ -17,7 +17,7 @@ Widget card(
           TField(
             letra: 'Produto $letra',
             tipo: tipoInput.titulo,
-            controller: textController.titulo,
+            controller: controllerCard.titulo,
             habilitado: habilitado,
             onChanged: (e) {
               funcao();
@@ -26,7 +26,7 @@ Widget card(
           TField(
             label: 'Peso',
             tipo: tipoInput.peso,
-            controller: textController.peso,
+            controller: controllerCard.peso,
             habilitado: habilitado,
             onChanged: (e) {
               funcao();
@@ -35,7 +35,7 @@ Widget card(
           TField(
             label: 'Preço',
             tipo: tipoInput.preco,
-            controller: textController.preco,
+            controller: controllerCard.preco,
             habilitado: habilitado,
             onChanged: (e) {
               funcao();

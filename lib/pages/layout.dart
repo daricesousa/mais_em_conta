@@ -19,7 +19,7 @@ class _LayoutState extends State<Layout> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        children: [HomePage(), RegraDeTresPage(), Container()],
+        children: [HomePage(), RegraDeTresPage()],
         controller: pageController,
       ),
       bottomNavigationBar: AnimatedBuilder(
@@ -44,10 +44,6 @@ class _LayoutState extends State<Layout> {
           icon: Icon(Icons.import_export),
           label: "Regra de três",
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.import_export),
-          label: "Regra de três",
-        )
       ],
     );
   }
