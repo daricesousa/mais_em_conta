@@ -11,21 +11,15 @@ class Layout extends StatefulWidget {
 }
 
 class _LayoutState extends State<Layout> {
-
   final pageController = PageController();
   final controller = LayoutControl();
   final _index = ValueNotifier(0);
-
-   void initState() {
-    controller.prencherPrecos();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        children: [HomePage(), RegraDeTresPage()],
+        children: [HomePage(), RegraDeTresPage(), Container()],
         controller: pageController,
       ),
       bottomNavigationBar: AnimatedBuilder(
@@ -45,6 +39,10 @@ class _LayoutState extends State<Layout> {
         BottomNavigationBarItem(
           icon: Icon(Icons.calculate),
           label: "Mais em conta",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.import_export),
+          label: "Regra de três",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.import_export),

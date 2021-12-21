@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class TextController {
   TextEditingController titulo = TextEditingController();
   TextEditingController peso = TextEditingController();
@@ -10,4 +11,8 @@ class TextController {
 
   static final maisDetalhesA = TextController();
   static final maisDetalhesB = TextController();
+
+
+
 }
+

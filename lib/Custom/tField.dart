@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mais_em_conta/Custom/style.dart';
 import 'package:mais_em_conta/Custom/cor.dart';
 import 'package:flutter/services.dart';
+import 'package:mais_em_conta/mascara.dart';
 import 'package:mais_em_conta/tipoInput.dart';
-import 'package:mais_em_conta/controllers.dart/currencyInputFormatter.dart';
 
 class TField extends StatelessWidget {
   final TextEditingController? controller;
@@ -12,6 +12,7 @@ class TField extends StatelessWidget {
   final String? Function(String?)? validator;
   late final tipoInput tipo;
   final String? letra;
+  final Function()? funcaoIcon;
   late final bool habilitado;
 
   TField({
@@ -22,18 +23,17 @@ class TField extends StatelessWidget {
     this.validator,
     this.letra,
     this.habilitado = true,
+    this.funcaoIcon,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: TextFormField(
         enabled: habilitado,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         style: Style.texto,
-        textAlign: TextAlign.center,
         validator: validator,
         controller: controller,
         onChanged: onChanged,
@@ -47,6 +47,14 @@ class TField extends StatelessWidget {
   InputDecoration decoration() {
     return InputDecoration(
       labelText: label,
+      suffixIcon: Container(
+        width: 1,
+        child: Align(
+          alignment: Alignment.topRight,
+          child: IconButton(
+              iconSize: 10, onPressed: funcaoIcon, icon: Icon(Icons.close, color: Cor.primary,)),
+        ),
+      ),
       hintText: tipo == tipoInput.titulo ? letra : '',
       hintStyle: tipo == tipoInput.titulo ? Style.titulo : Style.texto,
       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -68,11 +76,7 @@ class TField extends StatelessWidget {
   List<TextInputFormatter> inputFormatters() {
     switch (tipo) {
       case tipoInput.preco:
-        return [
-          FilteringTextInputFormatter.digitsOnly,
-          LengthLimitingTextInputFormatter(7),
-          CurrencyInputFormatter()
-        ];
+        return [MoneyMask()];
       case tipoInput.peso:
         return [
           FilteringTextInputFormatter.allow(RegExp("[0-9.,]")),

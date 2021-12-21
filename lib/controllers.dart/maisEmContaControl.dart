@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:mais_em_conta/controllers.dart/converter.dart';
@@ -7,7 +9,6 @@ import 'package:mais_em_conta/Custom/textos.dart';
 import 'package:mais_em_conta/controllers.dart/validacoes.dart';
 
 class MaisEmContaControl extends ChangeNotifier {
-
   Peso _peso = Peso.peso;
   Preco _preco = Preco.preco;
   Titulo _titulo = Titulo.titulo;
@@ -16,7 +17,19 @@ class MaisEmContaControl extends ChangeNotifier {
   bool calculado = false;
   String? erro;
 
-
+  void prencherPrecos() {
+    Timer.run(() {
+      double value = 0;
+      final formatter = NumberFormat.simpleCurrency(locale: "pt_Br");
+      String newText = formatter.format(value / 100);
+      TextController.A.preco.value = TextController.A.preco.value.copyWith(
+          text: newText,
+          selection: new TextSelection.collapsed(offset: newText.length));
+      TextController.B.preco.value = TextController.B.preco.value.copyWith(
+          text: newText,
+          selection: new TextSelection.collapsed(offset: newText.length));
+    });
+  }
 
   void chamarCalcular() {
     maisEconomico = '';
@@ -29,15 +42,17 @@ class MaisEmContaControl extends ChangeNotifier {
       _calcular();
     }
 
-    notifyListeners();
+    Timer.run(() {
+      notifyListeners();
+    });
   }
 
   void _definirVariaveis() {
     calculado = true;
     _peso.A = Converter.stringParaDouble(TextController.A.peso.text);
     _peso.B = Converter.stringParaDouble(TextController.B.peso.text);
-    _preco.A = Converter.reaisParaDouble(TextController.A.preco.text);
-    _preco.B = Converter.reaisParaDouble(TextController.B.preco.text);
+    _preco.A = Converter.reaisParaDouble(TextController.A.preco.text)!;
+    _preco.B = Converter.reaisParaDouble(TextController.B.preco.text)!;
 
     if (TextController.A.titulo.text != '')
       _titulo.A = TextController.A.titulo.text;
@@ -55,7 +70,9 @@ class MaisEmContaControl extends ChangeNotifier {
     } else {
       maisEconomico = Texto.mesmoCusto;
     }
-    notifyListeners();
+    Timer.run(() {
+      notifyListeners();
+    });
   }
 
   bool _validacoes(String? validacao) {

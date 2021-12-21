@@ -14,6 +14,13 @@ class _RegraDeTresPageState extends State<RegraDeTresPage> {
   final controller = RegraDeTresControl();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    controller.iniciarVariaveis();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -36,9 +43,9 @@ class _RegraDeTresPageState extends State<RegraDeTresPage> {
                 children: [
                   cards(),
                   DividerCust(),
-                  // mensagemMaisEconomico(),
-                  // DividerCust(),
-                  // botaoMaisDetalhes(),
+                  Text(controller.erro ?? ''),
+                  TextButton(
+                      onPressed: controller.validar, child: Text("Calcular")),
                 ],
               );
             }),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mais_em_conta/controllers.dart/textController.dart';
 import 'package:mais_em_conta/enumRadio.dart';
@@ -24,7 +26,9 @@ class MaisDetalhesController extends ChangeNotifier {
       diferenca = novoPrecoB - novoPrecoA;
       economiza = Texto.economiza(Titulo.titulo.A, diferenca);
     }
-    notifyListeners();
+   Timer.run(() {
+      notifyListeners();
+    });
   }
 
   void preencherCards(double pesoMain) {
@@ -34,7 +38,9 @@ class MaisDetalhesController extends ChangeNotifier {
     TextController.maisDetalhesB.peso.text = pesoMain.toString();
     TextController.maisDetalhesA.titulo = TextController.A.titulo;
     TextController.maisDetalhesB.titulo = TextController.B.titulo;
-    notifyListeners();
+    Timer.run(() {
+      notifyListeners();
+    });
   }
 
   double regraDeTres(double valor1, double valor2, double valor3) {

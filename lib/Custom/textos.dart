@@ -18,8 +18,8 @@ class Erro {
   static final campoIncorreto = 'Preencha os campos corretamente';
   static final pesoIncorreto = 'O peso não pode ser 0';
   static final precoIncorreto = 'O preço não pode ser R\$ 0,00';
-  // static final campoVazioRegraDeTres = 'Preencha 3 campos';
-  // static final campoVazioFaltando = 'Preencha apenas 3 campos';
+  static final campoVazioRegraDeTres = 'Preencha 3 campos';
+  static final campoVazioFaltando = 'Preencha apenas 3 campos';
 }
 
 

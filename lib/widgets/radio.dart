@@ -50,7 +50,7 @@ Widget _titleDoRadio(MaisDetalhesController controller){
                   String? _validacao = Validacao.peso(pesoDigitado.text);
                   if (_validacao == null) {
                     _pesoDigitadoDouble =
-                        Converter.stringParaDouble(pesoDigitado.text);
+                        Converter.stringParaDouble(pesoDigitado.text)!;
                     controller.preencherCards(_pesoDigitadoDouble);
                     controller.calcularNovosPrecos(_pesoDigitadoDouble);
                   }
