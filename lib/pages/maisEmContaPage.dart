@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mais_em_conta/Custom/botao.dart';
 import 'package:mais_em_conta/Custom/card.dart';
 import 'package:mais_em_conta/Custom/divider.dart';
 import 'package:mais_em_conta/Custom/style.dart';
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   final controller = MaisEmContaControl();
 
   @override
-   void initState() {
+  void initState() {
     controller.iniciarCards();
     super.initState();
   }
@@ -35,23 +36,32 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget body() {
-    return ListView(
-      padding: EdgeInsets.all(10),
-      children: [
-        AnimatedBuilder(
-            animation: controller,
-            builder: (context, snapshot) {
-              return Column(
-                children: [
-                  cards(),
-                  DividerCust(),
-                  mensagemMaisEconomico(),
-                  DividerCust(),
-                  botaoMaisDetalhes(),
-                ],
-              );
-            }),
-      ],
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (_, __) {
+        return RefreshIndicator(
+          onRefresh: () async {
+            controller.limparCampos();
+          },
+          child: ListView(
+            padding: EdgeInsets.all(10),
+            children: [
+              Center(
+                child: Column(
+                  children: [
+                    cards(),
+                    DividerCust(),
+                    Botao(onPressed: controller.chamarCalcular),
+                    mensagemMaisEconomico(),
+                    DividerCust(),
+                    botaoMaisDetalhes(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      }
     );
   }
 
@@ -74,7 +84,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget mensagemMaisEconomico() {
     return Visibility(
-      visible: controller.maisEconomico != '',
+      visible: controller.calculado,
       child: Text(controller.maisEconomico, style: Style.titulo),
       replacement: Text(controller.erro ?? ''),
     );

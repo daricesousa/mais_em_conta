@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mais_em_conta/Custom/botao.dart';
 import 'package:mais_em_conta/Custom/card.dart';
 import 'package:mais_em_conta/Custom/cor.dart';
 import 'package:mais_em_conta/Custom/divider.dart';
@@ -33,30 +34,37 @@ class _RegraDeTresPageState extends State<RegraDeTresPage> {
   }
 
   Widget body() {
-    return ListView(
-      padding: EdgeInsets.all(10),
-      children: [
-        AnimatedBuilder(
-            animation: controller,
-            builder: (context, snapshot) {
-              return Column(
-                children: [
-                  cards(),
-                  DividerCust(),
-                  Text(controller.erro ?? ''),
-                  TextButton(
-                      onPressed: controller.validar, child: Text("Calcular")),
-                ],
-              );
-            }),
-      ],
-    );
+    return AnimatedBuilder(
+        animation: controller,
+        builder: (_, __) {
+          return RefreshIndicator(
+            onRefresh: () async {
+              controller.limparCampos();
+            },
+            child: ListView(
+              padding: EdgeInsets.all(10),
+              children: [
+                Column(
+                  children: [
+                    cards(),
+                    Botao(onPressed: controller.validar),
+                    DividerCust(),
+                    Text(controller.erro ?? ''),
+                  ],
+                ),
+              ],
+            ),
+          );
+        });
   }
 
   Widget cards() {
     return Row(
       children: [
-        card(letra: 'A', controllerCard: TextController.regraDeTres.A, funcao: () {}),
+        card(
+            letra: 'A',
+            controllerCard: TextController.regraDeTres.A,
+            funcao: () {}),
         card(
           letra: 'B',
           controllerCard: TextController.regraDeTres.B,

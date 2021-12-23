@@ -6,24 +6,24 @@ import 'package:mais_em_conta/mascara.dart';
 import 'package:mais_em_conta/tipoInput.dart';
 
 class TField extends StatelessWidget {
-  final TextEditingController? controller;
+  final TextEditingController controller;
   final String? label;
-  final void Function(String?)? onChanged;
+  final void Function(String?) onChanged;
   final String? Function(String?)? validator;
   late final tipoInput tipo;
   final String? letra;
-  final Function()? funcaoIcon;
   late final bool habilitado;
+  bool apagavel;
 
   TField({
     required this.tipo,
-    this.controller,
-    this.onChanged,
+    required this.controller,
+    required this.onChanged,
     this.label,
     this.validator,
     this.letra,
     this.habilitado = true,
-    this.funcaoIcon,
+    this.apagavel = true,
   });
 
   @override
@@ -33,7 +33,7 @@ class TField extends StatelessWidget {
       child: TextFormField(
         enabled: habilitado,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        style: Style.texto,
+        style: tipo == tipoInput.titulo ? Style.titulo : Style.texto,
         validator: validator,
         controller: controller,
         onChanged: onChanged,
@@ -47,16 +47,9 @@ class TField extends StatelessWidget {
   InputDecoration decoration() {
     return InputDecoration(
       labelText: label,
-      suffixIcon: Container(
-        width: 1,
-        child: Align(
-          alignment: Alignment.topRight,
-          child: IconButton(
-              iconSize: 10, onPressed: funcaoIcon, icon: Icon(Icons.close, color: Cor.primary,)),
-        ),
-      ),
-      hintText: tipo == tipoInput.titulo ? letra : '',
-      hintStyle: tipo == tipoInput.titulo ? Style.titulo : Style.texto,
+      suffixIcon: buttonApagar(),
+      // hintText: tipo == tipoInput.titulo ? letra : '',
+      // hintStyle: tipo == tipoInput.titulo ? Style.titulo : Style.texto,
       floatingLabelBehavior: FloatingLabelBehavior.always,
       labelStyle: Style.texto,
       enabledBorder: border(),
@@ -85,5 +78,26 @@ class TField extends StatelessWidget {
       case tipoInput.titulo:
         return [];
     }
+  }
+
+  Widget buttonApagar() {
+    return Visibility(
+        visible: apagavel,
+        child: Container(
+          width: 1,
+          child: Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+                iconSize: 10,
+                onPressed: () {
+                  controller.clear();
+                  onChanged(controller.text);
+                },
+                icon: Icon(
+                  Icons.close,
+                  color: Cor.primary,
+                )),
+          ),
+        ));
   }
 }

@@ -18,6 +18,7 @@ class MaisEmContaControl extends ChangeNotifier {
   void iniciarCards() {
     _copiarCard(_textController.A, TextController.regraDeTres.A);
     _copiarCard(_textController.B, TextController.regraDeTres.B);
+    _preencherTitulos();
 
     double? precoA = Converter.reaisParaDouble(_textController.A.preco.text);
     double? precoB = Converter.reaisParaDouble(_textController.B.preco.text);
@@ -28,6 +29,31 @@ class MaisEmContaControl extends ChangeNotifier {
       _textController.B.preco.text = Converter.doubleParaTextControllerPreco(0);
     }
   }
+
+  void limparCampos(){
+    _textController.A.titulo.text = 'Produto A';
+     _textController.B.titulo.text = 'Produto B';
+     _textController.A.peso.text = '';
+     _textController.B.peso.text = '';
+     _textController.A.preco.text = Converter.doubleParaTextControllerPreco(0);
+     _textController.B.preco.text = Converter.doubleParaTextControllerPreco(0);
+     erro = '';
+     calculado = false;
+     notifyListeners();
+
+  }
+
+
+  void _preencherTitulos() {
+    if (_textController.A.titulo.text.isEmpty) {
+      _textController.A.titulo.text = 'Produto A';
+    }
+
+    if (_textController.B.titulo.text == '') {
+      _textController.B.titulo.text = 'Produto B';
+    }
+  }
+
 
   void _copiarCard(ControllerCard controllerCard1, ControllerCard controllerCard2){
     controllerCard1.peso.text = controllerCard2.peso.text;
@@ -65,6 +91,7 @@ class MaisEmContaControl extends ChangeNotifier {
   }
 
   void _calcular() {
+    _preencherTitulos();
     double a = double.parse((_peso.A! / _preco.A).toStringAsFixed(2));
     double b = double.parse((_peso.B! / _preco.B).toStringAsFixed(2));
     if (a > b) {
@@ -74,9 +101,7 @@ class MaisEmContaControl extends ChangeNotifier {
     } else {
       maisEconomico = Texto.mesmoCusto;
     }
-   
       notifyListeners();
-   
   }
 
   bool _validacoes(String? validacao) {

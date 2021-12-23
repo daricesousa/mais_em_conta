@@ -47,7 +47,7 @@ class _MaisDetalhesState extends State<MaisDetalhes> {
               cards(),
               ListTile(
                 title: Text("${controller.economiza}"),
-              )
+              ),
             ],
           )),
     ]);
@@ -60,6 +60,7 @@ class _MaisDetalhesState extends State<MaisDetalhes> {
           letra: 'A',
           controllerCard: TextController.maisDetalhes.A,
           habilitado: false,
+          apagavel: false,
           funcao: () {},
         ),
         card(
@@ -67,6 +68,7 @@ class _MaisDetalhesState extends State<MaisDetalhes> {
           controllerCard: TextController.maisDetalhes.B,
           funcao: () {},
           habilitado: false,
+          apagavel: false
         ),
       ],
     );

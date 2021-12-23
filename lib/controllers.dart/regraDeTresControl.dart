@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:mais_em_conta/Custom/textos.dart';
 import 'package:mais_em_conta/controllers.dart/converter.dart';
@@ -14,14 +12,24 @@ class RegraDeTresControl extends ChangeNotifier {
   void iniciarCards() {
     _copiarCard(_textController.A, TextController.maisEmConta.A);
     _copiarCard(_textController.B, TextController.maisEmConta.B);
-
+    _preencherTitulos();
     double? precoA = Converter.reaisParaDouble(_textController.A.preco.text);
     if (precoA == 0) {
       _textController.A.preco.clear();
     }
-    double? precoB = Converter.reaisParaDouble(_textController.A.preco.text);
+    double? precoB = Converter.reaisParaDouble(_textController.B.preco.text);
     if (precoB == 0) {
       _textController.B.preco.clear();
+    }
+  }
+
+  void _preencherTitulos() {
+    if (_textController.A.titulo.text.isEmpty) {
+      _textController.A.titulo.text = 'Produto A';
+    }
+
+    if (_textController.B.titulo.text == '') {
+      _textController.B.titulo.text = 'Produto B';
     }
   }
 
@@ -56,6 +64,7 @@ class RegraDeTresControl extends ChangeNotifier {
 
   void _chamarCalcular(int produto) {
     erro = '';
+    _preencherTitulos();
     double? precoA, precoB, pesoA, pesoB;
 
     pesoA = Converter.stringParaDouble(_textController.A.peso.text);
@@ -83,6 +92,17 @@ class RegraDeTresControl extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+   void limparCampos(){
+    _textController.A.titulo.text = 'Produto A';
+     _textController.B.titulo.text = 'Produto B';
+     _textController.A.peso.text = '';
+     _textController.B.peso.text = '';
+     _textController.A.preco.text = '';
+     _textController.B.preco.text = '';
+     erro = '';
+     notifyListeners();
   }
 
   double _regraDeTres(double mult1, double mult2, double div) {
