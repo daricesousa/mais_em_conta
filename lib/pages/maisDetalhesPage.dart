@@ -36,7 +36,7 @@ class _MaisDetalhesState extends State<MaisDetalhes> {
   Widget body() {
     return Column(children: [
       Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
         child: Text("Selecione o peso que deseja comprar"),
       ),
       RadiosRow(controller),

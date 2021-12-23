@@ -50,7 +50,6 @@ class RegraDeTresControl extends ChangeNotifier {
         _validarCampos(pesoB, 3) *
         _validarCampos(precoA, 5) *
         _validarCampos(precoB, 7);
-    print("produto: $produto");
     if (produto == 1)
       erro = Erro.campoVazioFaltando;
     else if (produto == 0)
@@ -111,7 +110,6 @@ class RegraDeTresControl extends ChangeNotifier {
 
   Campo _validacoes(String? validacao) {
     String? erro = validacao;
-    print("erro $erro");
     if (erro == null) return Campo.ok;
     if (erro == Erro.campoVazio)
       return Campo.vazio;

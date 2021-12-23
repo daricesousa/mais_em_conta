@@ -94,9 +94,13 @@ class MaisEmContaControl extends ChangeNotifier {
     _preencherTitulos();
     double a = double.parse((_peso.A! / _preco.A).toStringAsFixed(2));
     double b = double.parse((_peso.B! / _preco.B).toStringAsFixed(2));
-    if (a > b) {
+
+    double diferenca = ((_preco.A * _peso.B! )/ _peso.A!) - _preco.B;
+    diferenca = (double.parse(diferenca.toStringAsFixed(2))).abs();
+    
+    if (a > b && diferenca > 0) {
       maisEconomico = Texto.produtoMaisEconomico(_titulo.A);
-    } else if (a < b) {
+    } else if (a < b && diferenca > 0) {
       maisEconomico = Texto.produtoMaisEconomico(_titulo.B);
     } else {
       maisEconomico = Texto.mesmoCusto;

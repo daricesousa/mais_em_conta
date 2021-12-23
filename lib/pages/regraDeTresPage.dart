@@ -16,7 +16,6 @@ class _RegraDeTresPageState extends State<RegraDeTresPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     controller.iniciarCards();
     super.initState();
   }
@@ -47,7 +46,11 @@ class _RegraDeTresPageState extends State<RegraDeTresPage> {
                 Column(
                   children: [
                     cards(),
-                    Botao(onPressed: controller.validar),
+                    DividerCust(),
+                    Botao(onPressed: () {
+                      controller.validar;
+                      FocusScope.of(context).requestFocus(FocusNode());
+                    }),
                     DividerCust(),
                     Text(controller.erro ?? ''),
                   ],

@@ -37,32 +37,35 @@ class _HomePageState extends State<HomePage> {
 
   Widget body() {
     return AnimatedBuilder(
-      animation: controller,
-      builder: (_, __) {
-        return RefreshIndicator(
-          onRefresh: () async {
-            controller.limparCampos();
-          },
-          child: ListView(
-            padding: EdgeInsets.all(10),
-            children: [
-              Center(
-                child: Column(
-                  children: [
-                    cards(),
-                    DividerCust(),
-                    Botao(onPressed: controller.chamarCalcular),
-                    mensagemMaisEconomico(),
-                    DividerCust(),
-                    botaoMaisDetalhes(),
-                  ],
+        animation: controller,
+        builder: (_, __) {
+          return RefreshIndicator(
+            onRefresh: () async {
+              controller.limparCampos();
+            },
+            child: ListView(
+              padding: EdgeInsets.all(10),
+              children: [
+                Center(
+                  child: Column(
+                    children: [
+                      cards(),
+                      DividerCust(),
+                      Botao(onPressed: () {
+                        controller.chamarCalcular;
+                        FocusScope.of(context).requestFocus(FocusNode());
+                      }),
+                      DividerCust(),
+                      mensagemMaisEconomico(),
+                      DividerCust(),
+                      botaoMaisDetalhes(),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      }
-    );
+              ],
+            ),
+          );
+        });
   }
 
   Widget cards() {
