@@ -3,19 +3,20 @@ import 'package:mais_em_conta/Custom/style.dart';
 import 'package:mais_em_conta/Custom/cor.dart';
 import 'package:flutter/services.dart';
 import 'package:mais_em_conta/mascara.dart';
-import 'package:mais_em_conta/tipoInput.dart';
+import 'package:mais_em_conta/tipo_input.dart';
 
 class TField extends StatelessWidget {
   final TextEditingController controller;
   final String? label;
   final void Function(String?) onChanged;
   final String? Function(String?)? validator;
-  late final tipoInput tipo;
+  final tipoInput tipo;
   final String? letra;
-  late final bool habilitado;
-  bool apagavel;
+  final bool habilitado;
+  final bool apagavel;
 
-  TField({
+  const TField({
+    Key? key,
     required this.tipo,
     required this.controller,
     required this.onChanged,
@@ -24,7 +25,7 @@ class TField extends StatelessWidget {
     this.letra,
     this.habilitado = true,
     this.apagavel = true,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,9 @@ class TField extends StatelessWidget {
         cursorColor: Cor.primary,
         decoration: decoration(),
         inputFormatters: inputFormatters(),
+        keyboardType: tipo == tipoInput.titulo
+            ? TextInputType.name
+            : TextInputType.number,
       ),
     );
   }
@@ -48,8 +52,6 @@ class TField extends StatelessWidget {
     return InputDecoration(
       labelText: label,
       suffixIcon: buttonApagar(),
-      // hintText: tipo == tipoInput.titulo ? letra : '',
-      // hintStyle: tipo == tipoInput.titulo ? Style.titulo : Style.texto,
       floatingLabelBehavior: FloatingLabelBehavior.always,
       labelStyle: Style.texto,
       enabledBorder: border(),
@@ -83,7 +85,7 @@ class TField extends StatelessWidget {
   Widget buttonApagar() {
     return Visibility(
         visible: apagavel,
-        child: Container(
+        child: SizedBox(
           width: 1,
           child: Align(
             alignment: Alignment.topRight,

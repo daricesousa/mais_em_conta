@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mais_em_conta/Custom/card.dart';
 import 'package:mais_em_conta/widgets/radio.dart';
-import 'package:mais_em_conta/controllers.dart/maisDetalhesControl.dart';
-import 'package:mais_em_conta/controllers.dart/textController.dart';
+import 'package:mais_em_conta/controllers.dart/mais_detalhes_control.dart';
+import 'package:mais_em_conta/controllers.dart/text_controller.dart';
 import 'package:mais_em_conta/Custom/cor.dart';
 
 class MaisDetalhes extends StatefulWidget {
+  const MaisDetalhes({Key? key}) : super(key: key);
+
   @override
   _MaisDetalhesState createState() => _MaisDetalhesState();
 }
@@ -35,18 +37,18 @@ class _MaisDetalhesState extends State<MaisDetalhes> {
 
   Widget body() {
     return Column(children: [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
         child: Text("Selecione o peso que deseja comprar"),
       ),
-      RadiosRow(controller),
+      radiosRow(controller),
       Visibility(
           visible: controller.pesoEscolhido != null,
           child: Column(
             children: [
               cards(),
               ListTile(
-                title: Text("${controller.economiza}"),
+                title: Text(controller.economiza),
               ),
             ],
           )),

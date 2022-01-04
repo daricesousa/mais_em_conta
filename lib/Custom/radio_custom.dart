@@ -1,31 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mais_em_conta/widgets/radio.dart';
-import 'package:mais_em_conta/enumRadio.dart';
-export 'package:mais_em_conta/enumRadio.dart';
+import 'package:mais_em_conta/enum_radio.dart';
+export 'package:mais_em_conta/enum_radio.dart';
 import 'package:mais_em_conta/Custom/cor.dart';
-export 'package:mais_em_conta/controllers.dart/maisDetalhesControl.dart';
-import 'package:mais_em_conta/controllers.dart/maisDetalhesControl.dart';
+export 'package:mais_em_conta/controllers.dart/mais_detalhes_control.dart';
+import 'package:mais_em_conta/controllers.dart/mais_detalhes_control.dart';
 
 class RadioCunst extends StatefulWidget {
   final PesosRadio valor;
-  double peso;
+  final double peso;
   final MaisDetalhesController controller;
   final Widget title;
   final bool validacao;
 
-  RadioCunst({
+  const RadioCunst({
+    Key? key,
     required this.valor,
     required this.peso,
     required this.controller,
     required this.title,
     this.validacao = true,
-  });
+  }): super(key: key);
   @override
   _RadioCunstState createState() => _RadioCunstState();
 }
 
 class _RadioCunstState extends State<RadioCunst> {
+  late double peso;
+
+@override
+  void initState() {
+    peso = widget.peso;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -38,7 +47,7 @@ class _RadioCunstState extends State<RadioCunst> {
             onChanged: (PesosRadio? value) {
               widget.controller.pesoEscolhido = value;
               if (!widget.validacao) {
-                widget.peso = 0;
+                peso = 0;
                 pesoDigitado.text = '0';
               }
               widget.controller.calcularNovosPrecos(widget.peso);

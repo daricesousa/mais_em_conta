@@ -5,7 +5,7 @@ import 'package:mais_em_conta/Custom/cor.dart';
 class Style {
   static final texto = TextStyle(color: Cor.primary);
 
-  static final textoClaro = TextStyle(color: Colors.black);
+  static const textoClaro = TextStyle(color: Colors.black);
 
   static final titulo = TextStyle(
     color: Cor.primary,

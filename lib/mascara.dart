@@ -20,7 +20,7 @@ class MoneyMask extends TextInputFormatter {
     String formatted = newValue.text.replaceAll(RegExp(r'\D'), '');
     if (formatted.isEmpty || double.tryParse(formatted) == 0) {
       if (oldValue.text.length > newValue.text.length) {
-        return TextEditingValue(text: '');
+        return const TextEditingValue(text: '');
       }
     }
     double value = double.parse(formatted) / pow(10, decimalLenght);

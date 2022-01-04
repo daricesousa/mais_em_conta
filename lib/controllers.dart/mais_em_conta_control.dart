@@ -1,14 +1,14 @@
 import 'package:flutter/widgets.dart';
 import 'package:mais_em_conta/controllers.dart/converter.dart';
-import 'package:mais_em_conta/controllers.dart/textController.dart';
+import 'package:mais_em_conta/controllers.dart/text_controller.dart';
 import 'package:mais_em_conta/controllers.dart/variaveis.dart';
 import 'package:mais_em_conta/Custom/textos.dart';
 import 'package:mais_em_conta/controllers.dart/validacoes.dart';
 
 class MaisEmContaControl extends ChangeNotifier {
-  Peso _peso = Peso.peso;
-  Preco _preco = Preco.preco;
-  Titulo _titulo = Titulo.titulo;
+  final _peso = Peso.peso;
+  final _preco = Preco.preco;
+  final _titulo = Titulo.titulo;
   final _textController = TextController.maisEmConta;
 
   String maisEconomico = '';
@@ -71,9 +71,7 @@ class MaisEmContaControl extends ChangeNotifier {
       _definirVariaveis();
       _calcular();
     }
-
-    
-      notifyListeners();
+    notifyListeners();
   
   }
 
@@ -84,10 +82,12 @@ class MaisEmContaControl extends ChangeNotifier {
     _preco.A = Converter.reaisParaDouble(_textController.A.preco.text)!;
     _preco.B = Converter.reaisParaDouble(_textController.B.preco.text)!;
 
-    if (_textController.A.titulo.text != '')
+    if (_textController.A.titulo.text != '') {
       _titulo.A = _textController.A.titulo.text;
-    if (_textController.B.titulo.text != '')
+    }
+    if (_textController.B.titulo.text != '') {
       _titulo.B = _textController.B.titulo.text;
+    }
   }
 
   void _calcular() {
@@ -115,5 +115,6 @@ class MaisEmContaControl extends ChangeNotifier {
     } else {
       return false;
     }
+    
   }
 }

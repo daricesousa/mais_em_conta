@@ -1,4 +1,4 @@
-package com.example.mais_em_conta
+package com.wellmath.mais_em_conta
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mais_em_conta/Custom/textos.dart';
 import 'package:mais_em_conta/controllers.dart/converter.dart';
-import 'package:mais_em_conta/controllers.dart/textController.dart';
+import 'package:mais_em_conta/controllers.dart/text_controller.dart';
 import 'package:mais_em_conta/controllers.dart/validacoes.dart';
-import 'package:mais_em_conta/enumCampo.dart';
+import 'package:mais_em_conta/enum_campo.dart';
 
 class RegraDeTresControl extends ChangeNotifier {
   String? erro;
@@ -46,18 +46,19 @@ class RegraDeTresControl extends ChangeNotifier {
     Campo precoA = _validacoes(Validacao.preco(_textController.A.preco.text));
     Campo precoB = _validacoes(Validacao.preco(_textController.B.preco.text));
 
-    int produto = _validarCampos(pesoA, 2) *
-        _validarCampos(pesoB, 3) *
-        _validarCampos(precoA, 5) *
-        _validarCampos(precoB, 7);
-    if (produto == 1)
+    int produto = _validarcampos(pesoA, 2) *
+        _validarcampos(pesoB, 3) *
+        _validarcampos(precoA, 5) *
+        _validarcampos(precoB, 7);
+    if (produto == 1) {
       erro = Erro.campoVazioFaltando;
-    else if (produto == 0)
+    } else if (produto == 0) {
       erro = Erro.campoIncorreto;
-    else if (produto != 2 && produto != 3 && produto != 5 && produto != 7)
+    } else if (produto != 2 && produto != 3 && produto != 5 && produto != 7) {
       erro = Erro.campoVazioRegraDeTres;
-    else
+    } else {
       _chamarCalcular(produto);
+    }
     notifyListeners();
   }
 
@@ -111,16 +112,17 @@ class RegraDeTresControl extends ChangeNotifier {
   Campo _validacoes(String? validacao) {
     String? erro = validacao;
     if (erro == null) return Campo.ok;
-    if (erro == Erro.campoVazio)
+    if (erro == Erro.campoVazio) {
       return Campo.vazio;
-    else
+    } else {
       return Campo.incorreto;
+    }
   }
 
-  int _validarCampos(Campo campo, int posicao) {
-    if (campo == Campo.incorreto) return 0;
-    if (campo == Campo.ok) return 1;
-    if (campo == Campo.vazio) return posicao;
+  int _validarcampos(Campo validacao, int posicao) {
+    if (validacao == Campo.incorreto) return 0;
+    if (validacao == Campo.ok) return 1;
+    if (validacao == Campo.vazio) return posicao;
     return 0;
   }
 }

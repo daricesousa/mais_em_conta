@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mais_em_conta/controllers.dart/converter.dart';
-import 'package:mais_em_conta/controllers.dart/textController.dart';
-import 'package:mais_em_conta/enumRadio.dart';
+import 'package:mais_em_conta/controllers.dart/text_controller.dart';
+import 'package:mais_em_conta/enum_radio.dart';
 import 'package:mais_em_conta/controllers.dart/variaveis.dart';
 import 'package:mais_em_conta/Custom/textos.dart';
 
@@ -12,8 +12,8 @@ class MaisDetalhesController extends ChangeNotifier {
   String economiza = '';
   PesosRadio? pesoEscolhido;
 
-  Peso _peso = Peso.peso;
-  Preco _preco = Preco.preco;
+  final _peso = Peso.peso;
+  final _preco = Preco.preco;
 
   void calcularNovosPrecos(double pesoMain) {
     novoPrecoA = _regraDeTres(_peso.A!, _preco.A, pesoMain);
@@ -24,6 +24,9 @@ class MaisDetalhesController extends ChangeNotifier {
     } else if (novoPrecoB > novoPrecoA) {
       diferenca = novoPrecoB - novoPrecoA;
       economiza = Texto.economiza(Titulo.titulo.A, diferenca);
+    }
+    else{
+      economiza = Texto.mesmoCusto;
     }
       notifyListeners();
 

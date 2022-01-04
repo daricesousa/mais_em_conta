@@ -3,10 +3,12 @@ import 'package:mais_em_conta/Custom/botao.dart';
 import 'package:mais_em_conta/Custom/card.dart';
 import 'package:mais_em_conta/Custom/cor.dart';
 import 'package:mais_em_conta/Custom/divider.dart';
-import 'package:mais_em_conta/controllers.dart/regraDeTresControl.dart';
-import 'package:mais_em_conta/controllers.dart/textController.dart';
+import 'package:mais_em_conta/controllers.dart/regra_de_tres_control.dart';
+import 'package:mais_em_conta/controllers.dart/text_controller.dart';
 
 class RegraDeTresPage extends StatefulWidget {
+  const RegraDeTresPage({Key? key}) : super(key: key);
+
   @override
   _RegraDeTresPageState createState() => _RegraDeTresPageState();
 }
@@ -24,7 +26,7 @@ class _RegraDeTresPageState extends State<RegraDeTresPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Regra de três"),
+        title: const Text("Regra de três"),
         backgroundColor: Cor.primary,
         centerTitle: true,
       ),
@@ -41,17 +43,17 @@ class _RegraDeTresPageState extends State<RegraDeTresPage> {
               controller.limparCampos();
             },
             child: ListView(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               children: [
                 Column(
                   children: [
                     cards(),
-                    DividerCust(),
+                    const DividerCust(),
                     Botao(onPressed: () {
-                      controller.validar;
+                      controller.validar();
                       FocusScope.of(context).requestFocus(FocusNode());
                     }),
-                    DividerCust(),
+                    const DividerCust(),
                     Text(controller.erro ?? ''),
                   ],
                 ),

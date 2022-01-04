@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:mais_em_conta/Custom/radioCustom.dart';
-import 'package:mais_em_conta/Custom/tField.dart';
-import 'package:mais_em_conta/controllers.dart/textController.dart';
+import 'package:mais_em_conta/Custom/radio_custom.dart';
+import 'package:mais_em_conta/Custom/t_field.dart';
+import 'package:mais_em_conta/controllers.dart/text_controller.dart';
 import 'package:mais_em_conta/controllers.dart/converter.dart';
 import 'package:mais_em_conta/controllers.dart/variaveis.dart';
-import 'package:mais_em_conta/tipoInput.dart';
+import 'package:mais_em_conta/tipo_input.dart';
 import 'package:mais_em_conta/controllers.dart/validacoes.dart';
 
 final pesoDigitado = TextEditingController();
 double _pesoDigitadoDouble = 0;
 
-Widget RadiosRow(MaisDetalhesController controller) {
+Widget radiosRow(MaisDetalhesController controller) {
   return AnimatedBuilder(
       animation: controller,
       builder: (context, snapshot) {

@@ -4,12 +4,13 @@ import 'package:mais_em_conta/Custom/cor.dart';
 class Botao extends StatelessWidget {
   final void Function() onPressed;
   final bool loading;
-  Botao({required this.onPressed, this.loading = true});
+  const Botao({Key? key, required this.onPressed, this.loading = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal:10),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       height: 45,
       width: 1000,
       child: TextButton(
@@ -17,8 +18,8 @@ class Botao extends StatelessWidget {
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Cor.primary),
         ),
-        child: Text(
-          'CONFIRMAR',
+        child: const Text(
+          'Calcular',
           style: TextStyle(color: Colors.white),
         ),
       ),

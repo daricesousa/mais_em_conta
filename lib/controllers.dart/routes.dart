@@ -1,7 +1,9 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:mais_em_conta/pages/layout.dart';
-import 'package:mais_em_conta/pages/maisDetalhesPage.dart';
-import 'package:mais_em_conta/pages/maisEmContaPage.dart';
+import 'package:mais_em_conta/pages/mais_detalhes_page.dart';
+import 'package:mais_em_conta/pages/mais_em_comta_page.dart';
 
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -10,9 +12,9 @@ final navigator = navigatorKey.currentState!;
 class Routes {
   static const initial = RoutesNome.LAYOUT;
   static Map<String, Widget Function(BuildContext)> routes = {
-    RoutesNome.LAYOUT: (_) => Layout(),
-    RoutesNome.HOME: (_) => HomePage(),
-    RoutesNome.MAISDETALHES: (_) => MaisDetalhes(),
+    RoutesNome.LAYOUT: (_) => const Layout(),
+    RoutesNome.HOME: (_) => const HomePage(),
+    RoutesNome.MAISDETALHES: (_) => const MaisDetalhes(),
   };
 }
 

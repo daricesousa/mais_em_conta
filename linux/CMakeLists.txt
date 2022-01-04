@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
 set(BINARY_NAME "mais_em_conta")
-set(APPLICATION_ID "com.example.mais_em_conta")
+set(APPLICATION_ID "com.wellmath.mais_em_conta")
 
 cmake_policy(SET CMP0063 NEW)
 

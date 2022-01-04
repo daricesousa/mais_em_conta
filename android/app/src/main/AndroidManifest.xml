@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mais_em_conta">
+    package="com.wellmath.mais_em_conta">
    <application
-        android:label="mais_em_conta"
+        android:label="Mais em conta"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

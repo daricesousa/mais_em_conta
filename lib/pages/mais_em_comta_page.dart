@@ -4,12 +4,14 @@ import 'package:mais_em_conta/Custom/botao.dart';
 import 'package:mais_em_conta/Custom/card.dart';
 import 'package:mais_em_conta/Custom/divider.dart';
 import 'package:mais_em_conta/Custom/style.dart';
-import 'package:mais_em_conta/controllers.dart/maisEmContaControl.dart';
-import 'package:mais_em_conta/controllers.dart/textController.dart';
+import 'package:mais_em_conta/controllers.dart/mais_em_conta_control.dart';
+import 'package:mais_em_conta/controllers.dart/text_controller.dart';
 import 'package:mais_em_conta/Custom/cor.dart';
 import 'package:mais_em_conta/controllers.dart/routes.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -27,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mais em Conta'),
+        title: const Text('Mais em Conta'),
         backgroundColor: Cor.primary,
         centerTitle: true,
       ),
@@ -44,20 +46,20 @@ class _HomePageState extends State<HomePage> {
               controller.limparCampos();
             },
             child: ListView(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               children: [
                 Center(
                   child: Column(
                     children: [
                       cards(),
-                      DividerCust(),
+                      const DividerCust(),
                       Botao(onPressed: () {
-                        controller.chamarCalcular;
+                        controller.chamarCalcular();
                         FocusScope.of(context).requestFocus(FocusNode());
                       }),
-                      DividerCust(),
+                      const DividerCust(),
                       mensagemMaisEconomico(),
-                      DividerCust(),
+                      const DividerCust(),
                       botaoMaisDetalhes(),
                     ],
                   ),
@@ -89,7 +91,7 @@ class _HomePageState extends State<HomePage> {
     return Visibility(
       visible: controller.calculado,
       child: Text(controller.maisEconomico, style: Style.titulo),
-      replacement: Text(controller.erro ?? ''),
+      replacement: Text(controller.erro ?? '', style:  Style.texto,),
     );
   }
 
@@ -97,7 +99,7 @@ class _HomePageState extends State<HomePage> {
     return Visibility(
       visible: controller.calculado,
       child: GestureDetector(
-        child: Text(
+        child: const Text(
           "Mais detalhes",
           style: TextStyle(decoration: TextDecoration.underline),
         ),
